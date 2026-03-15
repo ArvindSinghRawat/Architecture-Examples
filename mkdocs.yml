@@ -1,9 +1,17 @@
 site_name: Architecture Docs
 
-strict: true
+# Repo Details
+repo_url: https://github.com/ArvindSinghRawat/Architecture-Examples
+repo_name: ArvindSinghRawat/Architecture-Examples
+edit_uri: edit/main/docs/
 
+# strict: true
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil 
+    view: material/eye
   palette: 
     # Palette toggle for dark mode
     - scheme: default
@@ -19,11 +27,18 @@ theme:
     - navigation.tabs
     - navigation.sections
     - search.highlight
+    # - content.action.edit
+    # - content.action.view
 
 nav:
-  - Home: Index.md
+  - Home: index.md
 
 plugins:
   - search
+  # - content.action.edit
   - git-revision-date-localized:
       enable_creation_date: true
+      enable_git_follow: false
+  - git-committers:
+      repository: ArvindSinghRawat/Architecture-Examples
+      branch: main
