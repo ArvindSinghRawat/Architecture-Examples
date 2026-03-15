@@ -6,25 +6,28 @@ on:
     paths:
       - 'docs/**'        # Triggers on any change inside the docs folder
       - 'mkdocs.yml'     # Triggers on changes to yml files in config
+      - '.github/workflows/**'
       - '!README.md'     # Excludes changes to this specific file
     branches:
       - main
 
 permissions:
-  contents: read
+  contents: write
   pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
+          cache: 'pip' # caching pip dependencies
 
-      - uses: pip install -r requriements.txt
+      - run: pip install -r requirements.txt
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
