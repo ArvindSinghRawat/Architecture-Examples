@@ -1,6 +1,7 @@
 name: Deploy Docs
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'docs/**'        # Triggers on any change inside the docs folder
