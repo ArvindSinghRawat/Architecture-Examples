@@ -198,12 +198,12 @@ features = [
     # user hovers over a link. This will reduce the perceived loading time
     # for the user.
     # https://zensical.org/docs/setup/navigation/#instant-prefetching
-    "navigation.instant.prefetch",
+    # "navigation.instant.prefetch",
 
     # In order to provide a better user experience on slow connections when
     # using instant navigation, a progress indicator can be enabled.
     # https://zensical.org/docs/setup/navigation/#progress-indicator
-    "navigation.instant.progress",
+    # "navigation.instant.progress",
 
     # When navigation paths are activated, a breadcrumb navigation is rendered
     # above the title of each page
@@ -213,7 +213,7 @@ features = [
     # When pruning is enabled, only the visible navigation items are included
     # in the rendered HTML, reducing the size of the built site by 33% or more.
     # https://zensical.org/docs/setup/navigation/#navigation-pruning
-    #"navigation.prune",
+    "navigation.prune",
 
     # When sections are enabled, top-level sections are rendered as groups in
     # the sidebar for viewports above 1220px, but remain as-is on mobile.
@@ -223,12 +223,12 @@ features = [
     # When tabs are enabled, top-level sections are rendered in a menu layer
     # below the header for viewports above 1220px, but remain as-is on mobile.
     # https://zensical.org/docs/setup/navigation/#navigation-tabs
-    #"navigation.tabs",
+    # "navigation.tabs",
 
     # When sticky tabs are enabled, navigation tabs will lock below the header
     # and always remain visible when scrolling down.
     # https://zensical.org/docs/setup/navigation/#sticky-navigation-tabs
-    #"navigation.tabs.sticky",
+    # "navigation.tabs.sticky",
 
     # A back-to-top button can be shown when the user, after scrolling down,
     # starts to scroll up again.
@@ -319,3 +319,12 @@ link = "https://github.com/ArvindSinghRawat/Architecture-Examples"
 [project.extra.status]
 wip = "Work in Progress"
 complete = "Complete"
+
+[project.markdown_extensions.toc]
+title = "On this page"
+permalink = "⚓︎"
+permalink_title = "Anchor link to this section"
+toc_depth = 3
+[project.markdown_extensions.toc.slugify]
+object = "pymdownx.slugs.slugify"
+kwds = { case = "lower" }   
