@@ -23,8 +23,8 @@ Aim of this doc is to cater few examples of Architecture documentation and its s
 
     ---
 
-    [Examples Repo](https://github.com/ArvindSinghRawat/Architecture-Examples) are licensed under MIT and available on [GitHub](https://github.com/ArvindSinghRawat/Architecture-Examples/blob/main/LICENSE)
+    [Examples Repo](https://github.com/ArvindSinghRawat/Architecture-Examples) is licensed under MIT and available on [GitHub](https://github.com/ArvindSinghRawat/Architecture-Examples/blob/main/LICENSE)
 
-    [:octicons-arrow-right-24: License](#)
+    [:octicons-arrow-right-24: License](https://github.com/ArvindSinghRawat/Architecture-Examples/blob/main/LICENSE)
 
 </div>
