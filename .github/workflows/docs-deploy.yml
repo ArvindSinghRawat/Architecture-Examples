@@ -1,0 +1,34 @@
+name: Deploy Docs
+
+on:
+  push:
+    paths:
+      - 'docs/**'        # Triggers on any change inside the docs folder
+      - 'mkdocs.yml'     # Triggers on changes to yml files in config
+      - '!README.md'     # Excludes changes to this specific file
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - uses: pip install -r requriements.txt
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        env:
+          MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
