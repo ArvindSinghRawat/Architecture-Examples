@@ -12,9 +12,14 @@ on:
       - main
 
 permissions:
-  contents: write
-  pages: write
+  contents: read
   id-token: write
+  pages: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "deploy"
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -27,12 +32,40 @@ jobs:
           python-version: '3.14'
           cache: 'pip' # caching pip dependencies
 
-      - run: pip install -r requirements.txt
+      - name: 'Installing dependencies'
+        run: pip install -r requirements.txt
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 'Building site'
+        run: mkdocs build -f mkdocs.yml
+
+      - name: 'Fix permissions'
+        run: |
+          chmod -c -R +rX "site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
+      - name: 'Archive artifact'
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "site/" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+        env:
+          INPUT_PATH: site/
+
+      - name: 'Upload artifact'
+        uses: actions/upload-artifact@v6
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: 'Deploy to GitHub Pages'
+        id: deployment
+        uses: actions/deploy-pages@v4
         env:
           MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
